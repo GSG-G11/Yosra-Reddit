@@ -1,14 +1,36 @@
 {
+  "name": "yosra-reddit",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "directories": {
+    "test": "test"
+  },
+  "scripts": {
+    "start": "cross-env NODE_ENV=productio node ./src",
+    "dev": "cross-env NODE_ENV=dev nodemon ./src",
+    "router-test": "cross-env NODE_ENV=test jest ./test/route.test.js",
+    "db-test": "cross-env NODE_ENV=test jest ./test/db.test.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/GSG-G11/Yosra-Reddit.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/GSG-G11/Yosra-Reddit/issues"
+  },
+  "homepage": "https://github.com/GSG-G11/Yosra-Reddit#readme",
   "dependencies": {
     "compression": "^1.7.4",
+    "cross-env": "^7.0.3",
     "env2": "^2.2.2",
     "express": "^4.17.3",
     "node-fetch": "^2.6.7"
   },
   "devDependencies": {
     "eslint": "^8.11.0",
-    "eslint-config-airbnb-base": "^15.0.0",
-    "eslint-plugin-import": "^2.25.4",
     "jest": "^27.5.1",
     "nodemon": "^2.0.15",
     "supertest": "^6.2.2"
