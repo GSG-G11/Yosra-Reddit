@@ -9,7 +9,7 @@ CREATE TABLE users (
     password text NOT NULL
 );
 
-CREATE TABLE blogs (
+CREATE TABLE posts (
     id serial PRIMARY KEY ,
     title VARCHAR(50) ,
     content  text NOT NULL,
