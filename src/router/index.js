@@ -1,7 +1,17 @@
-const router = require("express").Router();
+const router = require('express').Router();
 
-router.get("/", (req, res) => {
-  res.json("hello");
-});
+const {
+  redditHome,
+  loginHandler,
+  signUpHandler,
+  pageNotFound,
+  signUp,
+} = require('../controllers');
+
+router.get('/reddit', redditHome);
+router.get('/login', loginHandler);
+router.get('/signUp', signUpHandler);
+router.post('/signUp', signUp);
+router.use(pageNotFound);
 
 module.exports = router;
