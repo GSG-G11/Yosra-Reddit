@@ -1,23 +1,23 @@
 require("dotenv").config();
 const { sign } = require("jsonwebtoken");
-const { signupValidation } = require("../utils");
-const { hashPassword } = require("../utils");
+const { join } = require('path');
+const { signupValidation, hashPassword, userError} = require("../utils");
 const { signUpQuirey, getUser } = require("../database/queries");
-const { exist } = require("joi");
 
 const signUp = (req, res, next) => {
-  const userInput = req.body;
+  const {username, email , password} = req.body;
   signupValidation
-    .validateAsync(userInput)
+    .validateAsync(req.body)
     .then((data) => hashPassword(data.password))
     .then((hashpass) =>
-      signUpQuirey([userInput.username, userInput.email, hashpass])
+      signUpQuirey([username,email, hashpass])
     )
-    .then(sign({ username: userInput.username }, process.env.SECRET_KEY))
+    .then(sign({ email: email }, process.env.SECRET_KEY))
     .then((token) =>
       res.cookie('token', token, { httpOnly: true, secure: true })
+      .sendFile(join(__dirname, '..', '..', 'public', 'index.html'))
     )
-    .catch((err) => res.status(404).json({ message: 'The email you\'re using is already taken' }));
+    .catch((err) => next(err));
 };
 
 module.exports = signUp;
