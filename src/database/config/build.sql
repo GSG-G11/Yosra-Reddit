@@ -5,7 +5,7 @@ DROP TABLE  IF EXISTS users ,posts CASCADE;
 CREATE TABLE users (
     id serial PRIMARY KEY ,
     username VARCHAR(50) NOT NULL,
-    email VARCHAR(50) NOT NULL UNIQUE,
+    email VARCHAR(50) NOT NULL ,
     password text NOT NULL
 );
 

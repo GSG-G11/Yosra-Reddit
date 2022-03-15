@@ -8,7 +8,7 @@ const {
   signUp,
 } = require('../controllers');
 
-router.get('/', redditHome);
+router.get('/reddit', redditHome);
 router.get('/login', loginHandler);
 router.get('/signUp', signUpHandler);
 router.post('/signUp', signUp);

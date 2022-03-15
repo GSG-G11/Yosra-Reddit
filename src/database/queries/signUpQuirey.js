@@ -1,8 +1,8 @@
 const connection = require("../config/connections");
 
-const signUpQuirey = ({ username, email, password }) =>
+const signUpQuirey = (data) =>
   connection.query(
-    "INSERT INTO users (username ,  email, password) VALUES ($1,$2,$3)",
-    [username, email, password]
+    "INSERT INTO users (username, email, password) VALUES ($1,$2,$3)",
+    data
   );
 module.exports = signUpQuirey;

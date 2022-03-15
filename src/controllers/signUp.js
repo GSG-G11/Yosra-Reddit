@@ -1,38 +1,23 @@
-const { sign } = require('jsonwebtoken');
+require("dotenv").config();
+const { sign } = require("jsonwebtoken");
 const { signupValidation } = require("../utils");
 const { hashPassword } = require("../utils");
-const signUpQuirey = require("../database/queries");
+const { signUpQuirey, getUser } = require("../database/queries");
+const { exist } = require("joi");
 
-const signUp = (req, res) => {
+const signUp = (req, res, next) => {
+  const userInput = req.body;
   signupValidation
-    .validateAsync(req.body)
-    .then((data) => 
-      hashPassword(data.password, (error, password) => {
-          if(error){
-              console.log(error);
-          } else {
-            const { username, email} = data;
-            signUpQuirey({ username, email, password })
-            .then(()=> {
-                sign({ email }, process.env.SECRET, { expiresIn: '30d' }, (err, token) => {
-                    if (err) {
-                      console.log(err);
-                    } else {
-                      res.cookie('access_token', token, {
-                        maxAge: 2592000000,
-                        httpOnly: true,
-                      }).json({ message: 'done' });
-                    }
-                  }
-        )})
-              .catch(console.log);
-          }
-      })
+    .validateAsync(userInput)
+    .then((data) => hashPassword(data.password))
+    .then((hashpass) =>
+      signUpQuirey([userInput.username, userInput.email, hashpass])
     )
-    .catch((err) => {
-      console.log(err);
-    });
+    .then(sign({ username: userInput.username }, process.env.SECRET_KEY))
+    .then((token) =>
+      res.cookie('token', token, { httpOnly: true, secure: true })
+    )
+    .catch((err) => res.status(404).json({ message: 'The email you\'re using is already taken' }));
 };
 
 module.exports = signUp;
-
