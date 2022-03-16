@@ -1,7 +1,7 @@
-const connection = require("../config/connections");
+const connection = require('../config/connections');
 
 const getUser = (email) => {
-    connection.query('select * from users where email = $1', [email]);
+    return connection.query('SELECT * FROM users WHERE email = $1', [email]);
 }
 
 module.exports = getUser;
