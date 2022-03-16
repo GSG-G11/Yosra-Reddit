@@ -4,6 +4,7 @@ const signUpHandler = require('./pages/signUpHandler');
 const pageNotFound = require('./pages/pageNotFoundHandler');
 const serverErrorHandler = require('./pages/serverErrorHandler');
 const signUp = require('./signUp');
+const signIn = require('./signIn');
 
 module.exports = {
     redditHome,
@@ -12,4 +13,5 @@ module.exports = {
     pageNotFound,
     serverErrorHandler,
     signUp,
+    signIn,
 };
