@@ -19,7 +19,4 @@ submit.addEventListener('click', (e) => {
           window.location.href = "/home";
         }
       })
-      .then(console.log)
-
-
 });
