@@ -14,9 +14,10 @@ if (process.env.NODE_ENV === "dev") {
 
 const options = {
   connectionString: dbUrl,
-  ssl: {
-    rejectUnauthorized: false,
-  },
+  ssl:
+    process.env.NODE_ENV === 'production'
+      ? { rejectUnauthorized: false }
+      : false,
 };
 
 module.exports = new Pool(options);
