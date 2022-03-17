@@ -11,9 +11,11 @@ const {
   getpost,
   userPage,
 } = require('../controllers');
+const checkAuth = require('../middleware');
 
+// router.use(checkAuth);
 router.get('/reddit', redditHome);
-router.get('/home', userPage);
+router.get('/home',userPage);
 router.get('/signin', loginHandler);
 router.get('/signUp', signUpHandler);
 router.get('/getpost', getpost);
