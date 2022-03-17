@@ -12,9 +12,12 @@ if (process.env.NODE_ENV === "dev") {
   throw new Error("NO DB_URL");
 }
 
-const options = {
-  connectionString: dbUrl,
-  ssl: false,
-};
+  const options = {
+    connectionString: dbUrl,
+    ssl:
+      process.env.NODE_ENV === 'production'
+        ? { rejectUnauthorized: false }
+        : false,
+  };
 
 module.exports = new Pool(options);
