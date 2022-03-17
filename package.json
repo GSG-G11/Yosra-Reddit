@@ -7,7 +7,7 @@
     "test": "test"
   },
   "scripts": {
-    "start": "NODE_ENV=productio node ./src",
+    "start": "NODE_ENV=production node ./src",
     "dev": "cross-env NODE_ENV=dev nodemon ./src",
     "router-test": "cross-env NODE_ENV=test jest ./test/route.test.js",
     "db-test": "cross-env NODE_ENV=test jest ./test/db.test.js"
