@@ -4,27 +4,62 @@
     <meta charset="UTF-8" />
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Sign UP</title>
+    <script
+      src="https://kit.fontawesome.com/81c816aea5.js"
+      crossorigin="anonymous"
+    ></script>
+    <link rel="shortcut icon" type="image/png" href="../images/icon.png" />
+    <link rel="stylesheet" href="../css/signup.css" />
+    <title>Sign Up</title>
   </head>
   <body>
-    <form>
-      <h2>Create New Account</h2>
-      <div>
-        <label for="username">name</label>
-        <input type="text" id="username" name="username" required />
-      </div>
-      <div>
-        <label for="email">Email</label>
-        <input type="email" id="email" name="email" required />
-      </div>
-      <div>
-        <label for="password">Password</label>
-        <input type="password" id="password" name="password" required />
-      </div>
-      <input type="submit" value="Submit" id="submit" />
-      <p class="form-message">Already have account? <a href="/login">login</a>
-      </p>
-    </form>
+    <header>
+      <nav class="navbar">
+        <a href="/"><img src="../images/redditLogo.png" /></a>
+      </nav>
+    </header>
+    <div class="formContainer">
+      <form class="formDetails">
+        <h2>Create New Account</h2>
+        <div class="formRow">
+          <label for="username">name</label>
+          <input
+            type="text"
+            id="username"
+            name="username"
+            class="inputText"
+            required
+          />
+          <i class="fas fa-user"></i>
+        </div>
+        <div class="formRow">
+          <label for="email">Email</label>
+          <input
+            type="email"
+            id="email"
+            name="email"
+            class="inputText"
+            required
+          />
+          <i class="fas fa-envelope"></i>
+        </div>
+        <div class="formRow">
+          <label for="password">Password</label>
+          <input
+            type="password"
+            id="password"
+            name="password"
+            class="inputText"
+            required
+          />
+          <i class="fas fa-lock"></i>
+        </div>
+        <div class="button">
+          <input type="submit" value="Submit" id="submit" class="signup" />
+        </div>
+        <a class="goSignin" href="/signin">Already have an account? Login</a>
+      </form>
+    </div>
     <script src="../js/signUp.js"></script>
   </body>
 </html>

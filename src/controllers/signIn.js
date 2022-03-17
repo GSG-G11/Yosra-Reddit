@@ -11,24 +11,29 @@ const signIn = (req, res, next) => {
     .validateAsync(req.body)
     .then((result) => getUser(email))
     .then((data) => {
-      if (!data.rows.length) {
-        userError(
+      if (data.rows.length > 0) {
+        const hashPassword = data.rows[0].password;
+        return compare(password, hashPassword);
+      } else {
+        throw userError(
           400,
           "Invalid Email, check your email or create a new account"
         );
-      } else {
-        const hashPassword = data.rows[0].password;
-        const id = data.rows[0].id;
-        return compare(password, hashPassword);
       }
     })
-    .then((valid) => getUsername(email))
+    .then((valid) => {
+      if (!valid) {
+        throw userError(400, "uncorrect password");
+      } else {
+        return getUsername(email);
+      }
+    })
     .then((data) => data.rows[0].username)
     .then((username) => sign({ username: username }, process.env.SECRET_KEY))
     .then((token) =>
       res
         .cookie("token", token, { httpOnly: true, secure: true })
-        .sendFile(join(__dirname, "..", "..", "public", "index.html"))
+        .json({ message: "success sign IN" })
     )
     .catch((err) => next(err));
 };
